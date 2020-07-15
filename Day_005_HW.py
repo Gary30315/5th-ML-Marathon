@@ -14,24 +14,46 @@ import requests
 from PIL import Image
 from io import BytesIO
 import matplotlib.pyplot as plt
-# target_url ='https://raw.githubusercontent.com/vashineyu/slides_and_others/master/tutorial/examples/imagenet_urls_examples.txt'
-# response=requests.get(target_url)
-# data=response.text
-# split_tag = "\n"
-# data = data.split(split_tag)
-# print(len(data))
-# print(data[0].split('\t')[1])
-# df = pd.DataFrame(data)
-# print(df.head())
+target_url ='https://raw.githubusercontent.com/vashineyu/slides_and_others/master/tutorial/examples/imagenet_urls_examples.txt'
+response=requests.get(target_url)
+data=response.text
+split_tag = "\n"
+data = data.split(split_tag)
+data1=[]
+for x in data:
+    data1.append(x.split('\t'))
+df=pd.DataFrame(data1)
+response = requests.get(df.loc[0, 1])
+img = Image.open(BytesIO(response.content))
+img = np.array(img)
+# print(img.shape)
+plt.imshow(img)
+plt.show()
 
-# first_link = df.loc[[1],[0]]
-# split_tag1="\t"
-# first_link = first_link.split(split_tag1)
-# response1=requests.get(first_link)
-# img = Image.open(BytesIO(response1.content))
-# plt.imshow(img)
-# plt.show()
-# print(first_link)
+def img2arr_fromURLs(url_list, resize = False):
+    img_list = []
+    for url in url_list:
+        response = requests.get(url)
+        try:
+            img = Image.open(BytesIO(response.content))
+            if resize:
+                img = img.resize((256,256))
+            img = np.array(img)
+            img_list.append(img)
+        except:
+            pass
+    
+    return img_list
+
+result = img2arr_fromURLs(df[0:5][1].values)
+print("Total images that we got: %i " % len(result))
+
+for im_get in result:
+    plt.imshow(im_get)
+    plt.show()
+
+
+
 
 import json
 import pickle
