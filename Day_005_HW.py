@@ -3,11 +3,11 @@ import numpy as np
 import pandas as pd
 pd.set_option('display.unicode.ambiguous_as_wide', True)
 pd.set_option('display.unicode.east_asian_width', True)
-# data={'國家':['台灣','美國','英國'],'人口':np.random.randint(100000,size=3),}
-# data1=pd.DataFrame(data)
-# a=data1.groupby(by='國家')['人口'].mean()
-# print(a)
-# print("人口最多的國家是 :{}".format(data1.loc[data1.人口.idxmax(),'國家']))
+data={'國家':['台灣','美國','英國'],'人口':np.random.randint(100000,size=3),}
+data1=pd.DataFrame(data)
+a=data1.groupby(by='國家')['人口'].mean()
+print(a)
+print("人口最多的國家是 :{}".format(data1.loc[data1.人口.idxmax(),'國家']))
 
 #作業5-2
 import requests
@@ -33,38 +33,38 @@ import matplotlib.pyplot as plt
 # plt.show()
 # print(first_link)
 
-# import json
-# import pickle
-# data = []
-# with open("example.txt", 'r') as f:
-#     for line in f:
-#         line = line.replace('\n', '').split(',')
-#         data.append(line)
-# df = pd.DataFrame(data[1:])
-# df.columns = data[0]
+import json
+import pickle
+data = []
+with open("example.txt", 'r') as f:
+    for line in f:
+        line = line.replace('\n', '').split(',')
+        data.append(line)
+df = pd.DataFrame(data[1:])
+df.columns = data[0]
 
-# df.to_json('example01.json')
-# with open('example01.json', 'r') as f:
-#     j1 = json.load(f)
-# # print(j1)
-# df.set_index('id',inplace=True)
-# df.to_json('example02.json', orient='index')
-# with open('example02.json', 'r') as f:
-#     j2 = json.load(f)
-# # print(j2)
+df.to_json('example01.json')
+with open('example01.json', 'r') as f:
+    j1 = json.load(f)
+print(j1)
+df.set_index('id',inplace=True)
+df.to_json('example02.json', orient='index')
+with open('example02.json', 'r') as f:
+    j2 = json.load(f)
+print(j2)
 
-# array = np.array(data[1:])
-# # print(array)
-# np.save('example.npy',array)
-# a=np.load('example.npy')
-# # print(a)
+array = np.array(data[1:])
+print(array)
+np.save('example.npy',array)
+a=np.load('example.npy')
+print(a)
 
-# with open('example.pkl', 'wb') as f:
-#     pickle.dump(file=f, obj=data)
+with open('example.pkl', 'wb') as f:
+    pickle.dump(file=f, obj=data)
 
-# with open('example.pkl', 'rb') as f:
-#     pkl_data = pickle.load(f)
-# print(pkl_data)
+with open('example.pkl', 'rb') as f:
+    pkl_data = pickle.load(f)
+print(pkl_data)
 
 #作業5-3
 import matplotlib.pyplot as plt
@@ -77,22 +77,22 @@ img1 = skio.imread('example.jpg')
 plt.imshow(img1)
 plt.show()
 
-# img2 = Image.open('example.jpg')
-# img2 = np.array(img2)
-# plt.imshow(img2)
-# plt.show()
+img2 = Image.open('example.jpg')
+img2 = np.array(img2)
+plt.imshow(img2)
+plt.show()
 
-# img3 = cv2.imread('example.jpg')
-# plt.imshow(img3)
-# plt.show()
+img3 = cv2.imread('example.jpg')
+plt.imshow(img3)
+plt.show()
 
-# img4 = cv2.cvtColor(img3, cv2.COLOR_BGR2RGB)
-# plt.imshow(img4)
-# plt.show()
+img4 = cv2.cvtColor(img3, cv2.COLOR_BGR2RGB)
+plt.imshow(img4)
+plt.show()
 
 sio.savemat(file_name='example.mat', mdict={'img': img1})
 mat_arr = sio.loadmat('example.mat')
-# print(mat_arr.keys())
+print(mat_arr.keys())
 mat_arr = mat_arr['img']
 print(mat_arr.shape)
 plt.imshow(mat_arr)
