@@ -47,10 +47,10 @@ print(df[type_object].mean())
 print(df[type_object].max())
 print(df[type_object].nunique())
 
-#在操作object類型時會出問題，這邊object為字串資料，沒辦法做數字型態資料的取平均/最大值/相異值等操作
+#在操作object類型時會出問題，這邊object為字串資料，沒辦法做數字型態資料的取平均/最大值操作
 
 #作業2
 """
 boolean,二元的數字型資料類別。
-object類別最難處理
+categorical資料最難處理
 """
