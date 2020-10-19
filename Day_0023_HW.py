@@ -54,17 +54,13 @@ estimator = LogisticRegression()
 
 #作業2
 df_fixed = copy.deepcopy(df)
-df_num = df_fixed.shape[0]
-print(df_num)
-for i in range(df_num):
-    if df_fixed['Fare'][i] <=0:
-        df_fixed['Fare'][i] =1
-# df_fixed['Fare'] = stats.boxcox(df_fixed['Fare'])[0]
-# sns.distplot(df_fixed['Fare'][:train_num])
-# plt.show()
+df_fixed['Fare'] = df_fixed['Fare']+1
+df_fixed['Fare'] = stats.boxcox(df_fixed['Fare'])[0]
+sns.distplot(df_fixed['Fare'][:train_num])
+plt.show()
 
-# df_fixed = MMEncoder.fit_transform(df_fixed)
-# train_X = df_fixed[:train_num]
-# estimator = LogisticRegression()
-# print(cross_val_score(estimator, train_X, train_Y, cv=5).mean())
+df_fixed = MMEncoder.fit_transform(df_fixed)
+train_X = df_fixed[:train_num]
+estimator = LogisticRegression()
+print(cross_val_score(estimator, train_X, train_Y, cv=5).mean())
 
