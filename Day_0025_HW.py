@@ -5,6 +5,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import cross_val_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import LabelEncoder
+from sklearn.linear_model import LinearRegression
 
 data_path = 'Data/'
 df_train = pd.read_csv(data_path + 'titanic_train.csv')
@@ -37,10 +38,6 @@ print(f'shape : {train_X.shape}')
 print(f'score : {cross_val_score(estimator, train_X, train_Y, cv=5).mean()}')
 print(f'time : {time.time() - start} sec')
 
-df_temp = pd.DataFrame()
-for c in df.columns:
-    df_temp[c] = LabelEncoder().fit_transform(df[c])
-train_X = df_temp[:train_num]
 
 data = pd.concat([df[:train_num],train_Y],axis=1)
 for c in df.columns:
@@ -49,12 +46,18 @@ for c in df.columns:
     data = pd.merge(data,mean_df, on = c , how = 'left')
     data = data.drop([c],axis=1)    
 data = data.drop(['Survived'],axis=1)
-estimator = LogisticRegression()
-start = time.time()
 value = cross_val_score(estimator, data, train_Y, cv=5).mean()
 print(f'shape : {train_X.shape}')
 print(f'score : {value}')
 print(f'time : {time.time() - start} sec')
 
 #作業2
-
+df_temp = pd.DataFrame()
+for c in df.columns:
+    df_temp[c] = LabelEncoder().fit_transform(df[c])
+train_X = df_temp[:train_num]
+estimator = LinearRegression()
+start = time.time()
+print(f'shape : {train_X.shape}')
+print(f'score : {cross_val_score(estimator, train_X, train_Y, cv=5).mean()}')
+print(f'time : {time.time() - start} sec')
