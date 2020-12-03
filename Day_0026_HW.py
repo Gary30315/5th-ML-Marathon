@@ -33,27 +33,28 @@ train_num = train_Y.shape[0]
 # print(df.columns)
 
 
-
-
+#作業1
+#標籤編碼
 # df_temp = pd.DataFrame()
 # for c in df.columns:
 #     df_temp[c] = LabelEncoder().fit_transform(df[c])
 # train_X = df_temp[:train_num]
 # estimator = LogisticRegression()
 # print(cross_val_score(estimator, train_X, train_Y, cv=5).mean())
+
 count_df = df.groupby(['Cabin']).count()['Name'].reset_index()
 count_df = count_df.rename(columns={'Name':'Cabin_Count'})
 df = pd.merge(df, count_df, on=['Cabin'], how='left')
 count_df.sort_values(by=['Cabin_Count'], ascending=False)
 
 #計數編碼
-df_temp = pd.DataFrame()
-for c in object_features:
-    df_temp[c] = LabelEncoder().fit_transform(df[c])
-df_temp['Cabin_Count'] = df['Cabin_Count']
-train_X = df_temp[:train_num]
-estimator = LogisticRegression()
-print(cross_val_score(estimator, train_X, train_Y, cv=5).mean())
+# df_temp = pd.DataFrame()
+# for c in object_features:
+#     df_temp[c] = LabelEncoder().fit_transform(df[c])
+# df_temp['Cabin_Count'] = df['Cabin_Count']
+# train_X = df_temp[:train_num]
+# estimator = LogisticRegression()
+# print(cross_val_score(estimator, train_X, train_Y, cv=5).mean())
 
 #特徵雜湊
 # df_temp = pd.DataFrame()
@@ -66,7 +67,8 @@ print(cross_val_score(estimator, train_X, train_Y, cv=5).mean())
 # print(cross_val_score(estimator, train_X, train_Y, cv=5).mean())
 # print(df_temp.head())
 
-#均值編碼
+#作業2
+# 計數>特徵>標籤
 
 
 
